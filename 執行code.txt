@@ -1,0 +1,47 @@
+原始Donut GitHub 網址:https://github.com/clovaai/donut?tab=readme-ov-file
+
+============================================================================================================
+
+
+環境
+
+照原始Donut GitHub 應該使用"pip install donut-python" 即可，如果失敗可以參考原始網址使用git下載函式庫
+使用
+git clone https://github.com/clovaai/donut.git
+cd donut/
+conda create -n donut_official python=3.7
+conda activate donut_official
+pip install .
+
+============================================================================================================
+
+fine-tune
+
+首先，需要去改 config/train_cord.yaml 當中的config ，調整超參數、存檔點等等。
+然後使用指令 python train.py --config config/train_cord.yaml --pretrained_model_name_or_path "naver-clova-ix/donut-base-finetuned-zhtrainticket" --exp_version "test_experiment"
+
+注意:
+1.pretrained model是使用原始Donut團隊fine-tune好的中文版本
+2.exp version參照原始的就沒調整了
+
+============================================================================================================
+
+inference
+
+這邊我inference是分兩段式去執行
+
+
+第一段是依照原始paper的inference會輸出Tree Edit Distance (TED)score跟 F1 accuracy score，並且我額外寫了將output存進csv
+
+執行 python test.py --dataset_name_or_path ./advertise_1023 --pretrained_model_name_or_path ./result/1023/8e5_800/train_cord/test_experiment --save_path ./result/1023/8e5_800/output.json
+
+
+第二段是依照上一段輸出的csv去得出下游任務的Metrics，也就是欄位跟整體正確率
+執行 python test_try.py --csv_file_path ./result/1023/8e5_800/output.csv
+
+
+注意:
+1.後續如果要拿額外測試集去做效能評估，可能需要製作一個test資料夾丟入advertise_1023，格式如advertise_1000去評估
+2.這邊兩段執行的code，如果有不同的check point，並存到不同資料夾的話，都需要去改指令當中的檔案位置
+
+============================================================================================================
