@@ -32,7 +32,7 @@ advertise_1023裏頭
 train : 1053筆資料 (包含我自製的30筆)
 validation 與 test : 1筆 (測試是否能夠work)
 
-## 生成metadata.json
+## 生成metadata.jsonl
 
 可以執行 label.py
 我當初是設計讀取圖片的資料夾，以及讀取標註的csv
