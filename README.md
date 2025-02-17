@@ -20,7 +20,7 @@ inference是分兩段式去執行
 注意:
 1.後續如果要拿額外測試集去做效能評估，可能需要製作一個test資料夾丟入advertise_1023，格式如advertise_1000去評估
 2.這邊兩段執行的code，如果有不同的check point，並存到不同資料夾的話，都需要去改指令當中的檔案位置
-![Uploading image.png…]()
+
 
 ## 資料集
 
